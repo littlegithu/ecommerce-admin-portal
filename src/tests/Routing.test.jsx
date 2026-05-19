@@ -1,20 +1,27 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import App from '../App';
+import LandingPage from '../pages/LandingPage';
+import ProductsPage from '../pages/ProductsPage';
 
-test('renders home page at "/"', () => {
+// Mock the API calls to avoid actual fetch in tests
+vi.mock('../services/api', () => ({
+  getProducts: vi.fn(() => Promise.resolve([])),
+  deleteProduct: vi.fn(),
+}));
+
+test('renders landing page at "/"', () => {
   render(
     <MemoryRouter initialEntries={['/']}>
-      <App />
+      <LandingPage />
     </MemoryRouter>
   );
   expect(screen.getByText(/Welcome to MyStore Admin Portal/i)).toBeInTheDocument();
 });
 
-test('renders shop page at "/shop"', () => {
+test('renders shop page with search input', () => {
   render(
     <MemoryRouter initialEntries={['/shop']}>
-      <App />
+      <ProductsPage />
     </MemoryRouter>
   );
   expect(screen.getByPlaceholderText(/search products/i)).toBeInTheDocument();
