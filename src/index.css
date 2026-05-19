@@ -4,20 +4,43 @@
   box-sizing: border-box;
 }
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: system-ui, -apple-system, sans-serif;
   background: #f8fafc;
   color: #0f172a;
+  display: flex;
+  flex-direction: column;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- NAVBAR – BLACK BACKGROUND, COMPACT HEIGHT ----- */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: black;
+  padding: 0.5rem 2rem;
   flex-wrap: wrap;
+  overflow: visible;
+  min-height: 60px;
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  height: 120px;
+  width: auto;
+  display: block;
+  margin: -20px 0;
 }
 
 .nav-links {
@@ -27,34 +50,81 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #334155;
+  color: #f0f0f0;
   font-weight: 500;
 }
 
 .nav-links a.active {
-  color: #3b82f6;
-  border-bottom: 2px solid #3b82f6;
+  color: #ffcc00;
+  border-bottom: 2px solid #ffcc00;
 }
 
+.nav-links a:visited {
+  color: #f0f0f0;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+/* ----- LANDING PAGE – FILL ALL REMAINING SPACE ----- */
+.landing-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+
+.landing-main .landing-page {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}
+
+/* ----- OTHER PAGES (normal container) ----- */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
+  width: 100%;
   margin: 2rem auto;
   padding: 0 1rem;
+  flex: 1;
 }
 
+/* ----- SEARCH BAR CENTERED ----- */
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 2rem;
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto;            /* center horizontally */
+}
+
+/* ----- PRODUCT GRID – HORIZONTAL & CENTERED ----- */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
+  justify-content: center;   /* changed from flex-start to center */
   margin-top: 1.5rem;
 }
 
+/* ----- PRODUCT CARD – FIXED WIDTH, IMAGE FILLS CONTAINER ----- */
 .product-card {
+  flex: 0 0 auto;
+  width: 260px;
   background: white;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
@@ -65,6 +135,7 @@ body {
   width: 100%;
   height: 180px;
   object-fit: cover;
+  display: block;
 }
 
 .product-card h3 {
@@ -91,15 +162,6 @@ body {
   color: #1e293b;
   border: none;
   cursor: pointer;
-}
-
-.search-input {
-  width: 100%;
-  max-width: 300px;
-  padding: 0.5rem 1rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 2rem;
-  font-size: 1rem;
 }
 
 .product-form {
@@ -139,13 +201,20 @@ body {
   align-items: center;
 }
 
+/* ----- RESPONSIVE: STILL HORIZONTAL, BUT CARDS STACK ON VERY SMALL SCREENS ----- */
 @media (max-width: 640px) {
   .navbar {
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
   }
-  .product-grid {
-    grid-template-columns: 1fr;
+  .product-card {
+    width: calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    width: 100%;
   }
 }
