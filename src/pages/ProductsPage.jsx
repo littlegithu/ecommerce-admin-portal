@@ -22,7 +22,9 @@ export default function ProductsPage() {
 
   return (
     <div>
-      <SearchBar search={search} setSearch={setSearch} />
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <SearchBar search={search} setSearch={setSearch} />
+      </div>
       <div className="product-grid">
         {filtered.map(product => (
           <ProductCard key={product.id} product={product} onDelete={handleDelete} />

@@ -1,15 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import ProductsPage from './pages/ProductsPage';
 import AddProductPage from './pages/AddProductPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const isLanding = location.pathname === '/';
+
   return (
-    <BrowserRouter>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
-      <main className="container">
+      <main className={isLanding ? 'landing-main' : 'container'}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/shop" element={<ProductsPage />} />
@@ -17,6 +20,15 @@ function App() {
           <Route path="/shop/:id" element={<ProductDetailPage />} />
         </Routes>
       </main>
+      {/* Footer removed */}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
