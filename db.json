@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Air Zoom Pegasus",
+      "description": "Responsive cushioning, breathable mesh",
+      "price": 120,
+      "category": "running"
+    },
+    {
+      "id": 2,
+      "name": "React Phantom",
+      "description": "Snug fit, lightweight",
+      "price": 140,
+      "category": "lifestyle"
+    }
+  ]
+}
